@@ -1,7 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import IndexPage from "./Views/IndexPage";
-import FavoritesPage from "./Views/FavoritesPage";
 import Layout from "./layouts/Layout";
+import { Suspense, lazy } from "react";
+
+// Uso de lazy
+const FavoritesPage = lazy(() => import('./Views/FavoritesPage'))
 
 export default function AppRouter() {
     return (
@@ -9,7 +12,10 @@ export default function AppRouter() {
             <Routes>
                 <Route element={<Layout />}>
                     <Route path="" element={<IndexPage />} index/>
-                    <Route path="favoritos" element={<FavoritesPage />}/>
+                    <Route path="favoritos" element={
+                        <Suspense fallback='Cargando...'>
+                            <FavoritesPage />
+                        </Suspense>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

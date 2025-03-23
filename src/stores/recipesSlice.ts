@@ -32,7 +32,6 @@ export const createRecipesSlice: StateCreator<recipesSliceType> = (set, get) => 
     },
     selectRecipe: async (id) => {
         const selectedRecipe = await getRecipeById(id);
-        console.log(selectedRecipe)
         set({ selectedRecipe, modal: true });
     },
     closeModal() {
